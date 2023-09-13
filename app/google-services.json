@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1076803849074",
+    "project_id": "jetpack-compose-auth-test",
+    "storage_bucket": "jetpack-compose-auth-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076803849074:android:55dbac7d987d752b9e2beb",
+        "android_client_info": {
+          "package_name": "com.sample.composetutorial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6KzUxow8os85Jip76HMiA_rl8mFKdj9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -512,9 +512,9 @@ object AppUtils {
             cal.timeInMillis = time
             val outputPattern = "MM/dd/yyyy"
             DateFormat.format(outputPattern, cal).toString()
-        } catch (e: Exception) ({
+        } catch (e: Exception){
             LogUtils.error("parseDateTimeStamp", e.toString())
-        }).toString()
+        }.toString()
     }
 
     @JvmStatic

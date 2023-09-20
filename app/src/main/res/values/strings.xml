@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">ComposeTutorial</string>
+
+    <string name="as_needed_item">As Needed</string>
+    <string name="every_day_item">Every Day</string>
+    <string name="specific_days_item">Specific Days</string>
+    <string name="cycle_item">Cycle</string>
+    <string name="birth_control_item">Birth Control (28 day cycle)</string>
+    <string name="add_another_drug">Add another drug</string>
+    <string name="remove_drug_below">Remove Drug below</string>
+    <string name="back_to_home">Back to home</string>
+    <string name="expand_desc">Expand Button</string>
+    <string name="collapse_desc">Collapse Button</string>
+    <string name="refill_status">Refill Status</string>
+    <string name="add_to_mc_label">Add to Medicine Chest</string>
+    <string name="select_days_label">Select Days</string>
+    <string name="delete_drug">Delete Drug</string>
+
+    <string name="bs_quantity_time_label">Quantity and Time</string>
+    <string name="bs_set_pill_reminder_label">Pill Reminder</string>
+    <string name="mins_before">min(s) before</string>
+    <string name="no_app_available">No App Available</string>
+    <string name="na_only">NA</string>
+    <string name="MM_dd_yyyy">MM-dd-yyyy</string>
+    <string name="pricing_unavailable">Pricing Unavailable</string>
+    <string name="pharmacy_drug_search_patient_pay_price_per_day_tag">Pharmacy drug search patient pay price per day tag</string>
+    <string name="pharmacy_drug_search_patient_pay_tag">Pharmacy drug search patient pay tag</string>
+    <string name="session_timout_msg"><![CDATA[>Your session expired due to inactivity. Please sign in again.]]></string>
+    <string name="sign_in">Sign in</string>
 </resources>

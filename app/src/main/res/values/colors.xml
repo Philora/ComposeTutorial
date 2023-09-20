@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#702c91</color>
+    <color name="colorPrimaryDark">#702c91</color>
+    <color name="colorAccent">#702c91</color>
+    <color name="action_cta_color">#702c91</color>
+    <color name="primary_gray">#363436</color> <!-- charcoalGreyThree -->
+    <color name="secondary_gray">#5E5D5E</color> <!-- purplishGrey -->
+    <color name="purpley_grey">#868586</color> <!-- purpleyGrey -->
+    <color name="border_grey">#D7D6D7</color> <!-- lightLavendar -->
+    <color name="skeleton">#dddddd</color>
+    <color name="shimmer">#a2878787</color>
+
+    <color name="bg_components">#EAEAEA</color>
+    <color name="bg_grey">#F8F8F8</color>
+    <color name="bg_purple">#F3EDF5</color>
+    <color name="ice_blue">#F5FFFE</color>
+
+    <color name="green">#008275</color>
+    <color name="red">#D0100F</color>
+    <color name="yellow">#FFCA38</color>
+    <color name="orange">#F97D1D</color>
+    <color name="blue">#005387</color>
+    <color name="purpleLight">#F3EDF5</color>
+
+    <color name="bottom_nav_unselected">#4d4d4d</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="light_lavender">#d7d6d7</color>
+    <color name="very_light_pink">#eaeaea</color>
+    <color name="black_two">#030303</color>
+    <color name="calenderDayUnSelectColor">#4d4d4d</color>
+    <color name="calenderDaySelectColor">#005387</color>
+    <color name="disabled_view_color">#66FFFFFF</color>
+
+    <color name="span_blue">#1776B5</color>
+
 </resources>

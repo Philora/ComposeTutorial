@@ -75,6 +75,7 @@ class ComposeLogin : ComponentActivity() {
     //    @Preview(showBackground = true, showSystemUi = true)
     @Composable
     fun Login(
+//        onSuccessFullLogin: () -> Unit,
         authViewModel: AuthViewModel = viewModel(),
     ) {
         val localContext = LocalContext.current
@@ -100,6 +101,7 @@ class ComposeLogin : ComponentActivity() {
                 }
 
                 UserLoginStatus.SuccessFull -> {
+//                    onSuccessFullLogin() // raising an issue to add in Login passing
                     showToast("Login Successful")
                     localContext.startActivity(Intent(localContext, DashboardActivity::class.java))
                 }

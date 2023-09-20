@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/revamp_feedback_numeric_item_rounded_right_border">
+        <shape>
+            <solid android:color="@color/colorAccent" />
+            <corners
+                android:bottomLeftRadius="0dp"
+                android:radius="12dp"
+                android:topLeftRadius="0dp" />
+        </shape>
+    </item>
+</layer-list>

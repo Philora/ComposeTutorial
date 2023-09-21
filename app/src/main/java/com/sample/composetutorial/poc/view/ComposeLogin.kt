@@ -21,9 +21,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -35,6 +38,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -79,7 +83,7 @@ class ComposeLogin : ComponentActivity() {
         authViewModel: AuthViewModel = viewModel(),
     ) {
         val localContext = LocalContext.current
-
+        var passwordVisible by rememberSaveable { mutableStateOf(false) }
         var username by remember {
             mutableStateOf("")
         }
@@ -147,6 +151,7 @@ class ComposeLogin : ComponentActivity() {
                 LoginFields(
                     username,
                     password,
+                    passwordVisible,
                     onUsernameChanged = {
                         username = it
                     },
@@ -196,6 +201,7 @@ class ComposeLogin : ComponentActivity() {
     fun LoginFields(
         username: String,
         password: String,
+        passwordVisible: Boolean,
         onUsernameChanged: (String) -> Unit,
         onPasswordChanged: (String) -> Unit,
         onForgotPasswordClick: () -> Unit,
@@ -222,9 +228,21 @@ class ComposeLogin : ComponentActivity() {
                 label = "Password",
                 placeholder = "Enter your Password",
                 onValueChange = onPasswordChanged,
-                visualTransformation = PasswordVisualTransformation(),
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 leadingIcon = {
                     Icon(Icons.Default.Lock, contentDescription = "Password icon")
+                },
+                trailingIcon = {
+                    val image = if (passwordVisible)
+                        Icons.Filled.Visibility
+                    else Icons.Filled.VisibilityOff
+
+                    // Please provide localized description for accessibility services
+                    val description = if (passwordVisible) "Hide password" else "Show password"
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(imageVector = image, description)
+                    }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,

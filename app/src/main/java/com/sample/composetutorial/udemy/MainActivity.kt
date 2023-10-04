@@ -21,9 +21,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 
 class MainActivity : AppCompatActivity() {
@@ -123,20 +125,50 @@ fun PreviewItemScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConstraintItemScreen() {
-    ConstraintLayout(modifier = Modifier.fillMaxHeight()) {
-        val (box, input, increase, decrease) = createRefs()
+    val constraints = ConstraintSet {
+        val box = createRefFor("box")
+        val input = createRefFor("input")
+        val increase = createRefFor("increase")
+        val decrease = createRefFor("decrease")
+
+        constrain(box) {
+            start.linkTo(parent.start)
+            top.linkTo(parent.top)
+            end.linkTo(parent.end)
+        }
+
+        constrain(input) {
+            top.linkTo(input.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+
+        constrain(increase) {
+            start.linkTo(parent.start)
+            top.linkTo(input.bottom)
+            bottom.linkTo(parent.bottom)
+            width = Dimension.fillToConstraints
+            end.linkTo(decrease.start)
+        }
+
+        constrain(decrease) {
+            start.linkTo(increase.end)
+            top.linkTo(increase.top)
+            end.linkTo(parent.end)
+            bottom.linkTo(increase.bottom)
+            width = Dimension.fillToConstraints
+        }
+
+    }
+
+    ConstraintLayout(modifier = Modifier.fillMaxHeight(), constraintSet = constraints) {
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Magenta)
                 .height(500.dp)
-                .constrainAs(box) {
-                                  start.linkTo(parent.start)
-                                  top.linkTo(parent.top)
-                                  end.linkTo(parent.end)
-
-                }, contentAlignment = Alignment.Center
+                .layoutId("box"), contentAlignment = Alignment.Center
         ) {
             Box(
                 modifier = Modifier
@@ -179,36 +211,20 @@ fun ConstraintItemScreen() {
             onValueChange = {/* TODO */ },
             modifier = Modifier
                 .padding(4.dp)
-                .constrainAs(input) {
-                    top.linkTo(box.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
+                .layoutId("input")
         )
 
         Button(
             onClick = {}, modifier = Modifier
                 .padding(4.dp)
-                .constrainAs(increase) {
-                    start.linkTo(parent.start)
-                    top.linkTo(input.bottom)
-                    bottom.linkTo(parent.bottom)
-                    width = Dimension.fillToConstraints
-                    end.linkTo(decrease.start)
-                }
+                .layoutId("increase")
         ) {
             Text(text = "Increment")
         }
         Button(
             onClick = { /*TODO*/ }, modifier = Modifier
                 .padding(4.dp)
-                .constrainAs(decrease) {
-                    start.linkTo(increase.end)
-                    top.linkTo(increase.top)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(increase.bottom)
-                    width = Dimension.fillToConstraints
-                }
+                .layoutId("decrease")
         ) {
             Text(text = "Decrement")
         }

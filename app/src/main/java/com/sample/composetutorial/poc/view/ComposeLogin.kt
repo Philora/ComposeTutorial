@@ -53,6 +53,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -76,14 +77,14 @@ class ComposeLogin : ComponentActivity() {
         }
     }
 
-    //    @Preview(showBackground = true, showSystemUi = true)
+    @Preview(showBackground = true, showSystemUi = true)
     @Composable
     fun Login(
 //        onSuccessFullLogin: () -> Unit,
         authViewModel: AuthViewModel = viewModel(),
     ) {
         val localContext = LocalContext.current
-        var passwordVisible by rememberSaveable { mutableStateOf(false) }
+        val passwordVisible by rememberSaveable { mutableStateOf(false) }
         var username by remember {
             mutableStateOf("")
         }
@@ -206,6 +207,7 @@ class ComposeLogin : ComponentActivity() {
         onPasswordChanged: (String) -> Unit,
         onForgotPasswordClick: () -> Unit,
     ) {
+        var passwordVisibleCheck :Boolean = passwordVisible
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             DemoField(
                 value = username,
@@ -228,19 +230,19 @@ class ComposeLogin : ComponentActivity() {
                 label = "Password",
                 placeholder = "Enter your Password",
                 onValueChange = onPasswordChanged,
-                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                visualTransformation = if (passwordVisibleCheck) VisualTransformation.None else PasswordVisualTransformation(),
                 leadingIcon = {
                     Icon(Icons.Default.Lock, contentDescription = "Password icon")
                 },
                 trailingIcon = {
-                    val image = if (passwordVisible)
+                    val image = if (passwordVisibleCheck)
                         Icons.Filled.Visibility
                     else Icons.Filled.VisibilityOff
 
                     // Please provide localized description for accessibility services
                     val description = if (passwordVisible) "Hide password" else "Show password"
 
-                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    IconButton(onClick = { passwordVisibleCheck = !passwordVisibleCheck }) {
                         Icon(imageVector = image, description)
                     }
                 },

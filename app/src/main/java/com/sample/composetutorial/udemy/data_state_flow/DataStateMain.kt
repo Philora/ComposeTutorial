@@ -16,9 +16,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +31,10 @@ class DataStateMain : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BoxScreen()
+            var count by remember { // composable memory for remembering the value
+                mutableStateOf(0)
+            }
+            BoxScreen(count) { newCount -> count = newCount }
         }
     }
 }
@@ -39,11 +42,9 @@ class DataStateMain : ComponentActivity() {
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BoxScreen() {
+fun BoxScreen(count: Int, onCountChange: (Int) -> Unit) {
     val boxSize = 400.dp
-    var count by remember { // composable memory for remembering the
-        mutableStateOf(0)
-    }
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             modifier = Modifier
@@ -71,13 +72,13 @@ fun BoxScreen() {
 
         Row(modifier = Modifier.weight(1f)) {
             Button(
-                onClick = { count++ }, modifier = Modifier
+                onClick = { onCountChange(count + 1) }, modifier = Modifier
                     .padding(8.dp)
             ) {
                 Text(text = "Increment")
             }
             Button(
-                onClick = { count = if (count <= 0) 0 else count - 1 },
+                onClick = { onCountChange(if (count <= 0) 0 else count - 1) },
                 modifier = Modifier
                     .padding(8.dp)
             ) {
@@ -91,5 +92,8 @@ fun BoxScreen() {
 @Preview
 @Composable
 fun PreviewBoxScreen() {
-    BoxScreen()
+    var count by remember { // composable memory for remembering the value
+        mutableStateOf(0)
+    }
+    BoxScreen(count) { newCount -> count = newCount }
 }

@@ -18,6 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -39,7 +41,7 @@ class DataStateMain : ComponentActivity() {
 @Composable
 fun BoxScreen() {
     val boxSize = 400.dp
-    var count = remember { // composable memory for remembering the
+    var count by remember { // composable memory for remembering the
         mutableStateOf(0)
     }
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -49,7 +51,7 @@ fun BoxScreen() {
                 .background(Color.Red), contentAlignment = Alignment.Center
         ) {
             var childSize = boxSize - 20.dp
-            for (i in 0 until count.value) {
+            for (i in 0 until count) {
                 Box(
                     modifier = Modifier
                         .size(childSize)
@@ -62,24 +64,22 @@ fun BoxScreen() {
 
         }
         OutlinedTextField(
-            value = "${count.value}",
+            value = "${count}",
             onValueChange = {/* TODO */ },
             modifier = Modifier.padding(4.dp)
         )
 
         Row(modifier = Modifier.weight(1f)) {
             Button(
-                onClick = { count.value++ }, modifier = Modifier
-                    .padding(4.dp)
-                    .weight(1f)
+                onClick = { count++ }, modifier = Modifier
+                    .padding(8.dp)
             ) {
                 Text(text = "Increment")
             }
             Button(
-                onClick = { count.value = if (count.value <= 0) 0 else count.value - 1 },
+                onClick = { count = if (count <= 0) 0 else count - 1 },
                 modifier = Modifier
-                    .padding(4.dp)
-                    .weight(1f)
+                    .padding(8.dp)
             ) {
                 Text(text = "Decrement")
             }

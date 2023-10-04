@@ -49,6 +49,17 @@ fun BoxScreen() {
                 .size(boxSize)
                 .background(Color.Red), contentAlignment = Alignment.Center
         ) {
+            var childSize = boxSize - 20.dp
+            for (i in 0 until count.value) {
+                Box(
+                    modifier = Modifier
+                        .size(childSize)
+                        .rotate(i * 3f)
+                        .background(Color.Gray)
+                        .border(1.dp, Color.Black)
+                )
+                childSize -= 20.dp
+            }
 
         }
         OutlinedTextField(

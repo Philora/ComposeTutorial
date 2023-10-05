@@ -16,7 +16,7 @@
         android:theme="@style/Theme.ComposeTutorial"
         tools:targetApi="31">
         <activity
-            android:name=".udemy.animated_visibility_motion.MotionAnimation"
+            android:name=".udemy.animated_visibility_motion.InfiniteTransition"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ComposeTutorial">

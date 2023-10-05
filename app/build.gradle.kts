@@ -79,7 +79,6 @@ dependencies {
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 
-    implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha12")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -87,4 +86,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Constraint Layout
+    implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha12")
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.2")
 }

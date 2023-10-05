@@ -14,9 +14,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sample.composetutorial.ui.theme.ComposeTutorialTheme
@@ -26,7 +29,7 @@ class InfiniteTransition : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeTutorialTheme {
-                MyInfiniteTransitionDemo1()
+                MyInfiniteTransitionDemo2()
             }
         }
     }
@@ -34,30 +37,51 @@ class InfiniteTransition : ComponentActivity() {
 
 @Preview
 @Composable
-fun MyInfiniteTransitionDemo1() {
-    val infiniteTransition = rememberInfiniteTransition()
-    val lineStart by infiniteTransition.animateFloat(
+fun MyInfiniteTransitionDemo2() {
+    val myInfiniteTransition = rememberInfiniteTransition()
+    val pitch by myInfiniteTransition.animateFloat(
         initialValue = 0f,
-        targetValue = 600f,
+        targetValue = 90f,
         animationSpec = infiniteRepeatable(
-            animation = tween(500),
+            animation = tween(1000),
             repeatMode = RepeatMode.Reverse
-        ),
+        )
     )
 
+    val yaw by myInfiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 90f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        Canvas(Modifier.fillMaxSize()) {
-            drawLine(
-                Color.Blue,
-                start = Offset(lineStart, size.height / 2),
-                end = Offset(lineStart + 200f, size.height / 2),
-                strokeWidth = 10f
-            )
-        }
-    }
+        Canvas(
+            Modifier
+                .fillMaxSize(0.5f)
+                .padding(8.dp)
+                .align(Alignment.Center)
+                .rotate(45f)
+                .graphicsLayer {
+                    rotationX = pitch
+                }
+        ) { drawCircle(Color.Black, style = Stroke(5f)) }
 
+        Canvas(
+            Modifier
+                .fillMaxSize(0.5f)
+                .padding(8.dp)
+                .align(Alignment.Center)
+                .rotate(45f)
+                .graphicsLayer {
+                    rotationY = yaw
+                }
+        ) { drawCircle(Color.Black, style = Stroke(5f)) }
+
+    }
 }

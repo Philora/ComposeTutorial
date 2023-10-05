@@ -38,9 +38,9 @@ fun MyInfiniteTransitionDemo1() {
     val infiniteTransition = rememberInfiniteTransition()
     val lineStart by infiniteTransition.animateFloat(
         initialValue = 0f,
-        targetValue = 300f,
+        targetValue = 600f,
         animationSpec = infiniteRepeatable(
-            animation = tween(1000),
+            animation = tween(500),
             repeatMode = RepeatMode.Reverse
         ),
     )
@@ -55,7 +55,7 @@ fun MyInfiniteTransitionDemo1() {
                 Color.Blue,
                 start = Offset(lineStart, size.height / 2),
                 end = Offset(lineStart + 200f, size.height / 2),
-                strokeWidth = 5f
+                strokeWidth = 10f
             )
         }
     }

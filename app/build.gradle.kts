@@ -90,4 +90,7 @@ dependencies {
     // Constraint Layout
     implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha12")
     implementation("androidx.compose.runtime:runtime-livedata:1.5.2")
+
+    // Network images
+    implementation("com.google.accompanist:accompanist-coil:0.6.2")
 }

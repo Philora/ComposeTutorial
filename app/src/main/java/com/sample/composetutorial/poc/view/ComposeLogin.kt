@@ -21,9 +21,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -35,6 +38,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,6 +53,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -72,14 +77,14 @@ class ComposeLogin : ComponentActivity() {
         }
     }
 
-    //    @Preview(showBackground = true, showSystemUi = true)
+    @Preview(showBackground = true, showSystemUi = true)
     @Composable
     fun Login(
 //        onSuccessFullLogin: () -> Unit,
         authViewModel: AuthViewModel = viewModel(),
     ) {
         val localContext = LocalContext.current
-
+        val passwordVisible by rememberSaveable { mutableStateOf(false) }
         var username by remember {
             mutableStateOf("")
         }
@@ -147,6 +152,7 @@ class ComposeLogin : ComponentActivity() {
                 LoginFields(
                     username,
                     password,
+                    passwordVisible,
                     onUsernameChanged = {
                         username = it
                     },
@@ -196,10 +202,12 @@ class ComposeLogin : ComponentActivity() {
     fun LoginFields(
         username: String,
         password: String,
+        passwordVisible: Boolean,
         onUsernameChanged: (String) -> Unit,
         onPasswordChanged: (String) -> Unit,
         onForgotPasswordClick: () -> Unit,
     ) {
+        var passwordVisibleCheck :Boolean = passwordVisible
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             DemoField(
                 value = username,
@@ -222,9 +230,21 @@ class ComposeLogin : ComponentActivity() {
                 label = "Password",
                 placeholder = "Enter your Password",
                 onValueChange = onPasswordChanged,
-                visualTransformation = PasswordVisualTransformation(),
+                visualTransformation = if (passwordVisibleCheck) VisualTransformation.None else PasswordVisualTransformation(),
                 leadingIcon = {
                     Icon(Icons.Default.Lock, contentDescription = "Password icon")
+                },
+                trailingIcon = {
+                    val image = if (passwordVisibleCheck)
+                        Icons.Filled.Visibility
+                    else Icons.Filled.VisibilityOff
+
+                    // Please provide localized description for accessibility services
+                    val description = if (passwordVisible) "Hide password" else "Show password"
+
+                    IconButton(onClick = { passwordVisibleCheck = !passwordVisibleCheck }) {
+                        Icon(imageVector = image, description)
+                    }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
